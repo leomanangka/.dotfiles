@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# THIS FILE SHOULD BE SOURCED
+
+FILE_SELECT="$(find -type d | fzf --multi --height 80% --border=sharp\
+  --preview-window border-sharp --preview-label='[ DIRECTORY ]'\
+  --preview='tree -C {}'\
+  --prompt='Dirs> '\
+  --bind='?:toggle-preview'\
+  --bind='ctrl-d:change-prompt(Dirs> )'\
+  --bind='ctrl-d:+reload(find -type d)'\
+  --bind='ctrl-d:+change-preview(tree -C {})'\
+  --bind='ctrl-d:+refresh-preview'\
+  --bind='ctrl-f:change-prompt(File> )'\
+  --bind='ctrl-f:+reload(find -type f)'\
+  --bind='ctrl-f:+change-preview(if [[ {} == *.jpg || {} == *.png ]]; then
+  kitty icat --clear --transfer-mode=stream --stdin=no --unicode-placeholder --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}
+else
+  cat {}
+  fi)'\
+  --bind='ctrl-f:+change-preview-label([ FILE ])'\
+  --bind='ctrl-f:+refresh-preview'\
+  --bind='del:execute(rm -ri {+})'\
+  --bind='ctrl-a:select-all'\
+  --bind='ctrl-x:deselect-all'\
+  --header '
+  [CTRL-D] show directories | [CTRL-F] show files | [CTRL-A] select all
+  [CTRL-X] deselect all     | [?] toggle preview  | [DEL] delete
+  [CTRL-C or ESC] exit
+  '
+  )"
+
+# no selection do nothing
+if [ -z "$FILE_SELECT" ]; then
+  return 0
+fi
+
+# handle multiple select
+if [ -n "$FILE_SELECT" ]; then
+  # for directory it will choose first selection 
+  FIRST_DIR=$(echo "$FILE_SELECT" | sed -n '1p')
+
+  if [ -d "$FIRST_DIR" ]; then
+    cd "$FIRST_DIR" || exit
+  elif [[ -f "$FILE_SELECT" && ("${FILE_SELECT##*.}" == "jpg" || "${FILE_SELECT##*.}" == "png") ]]; then
+    ristretto "$FILE_SELECT" || exit
+  else
+    eval $EDITOR $FILE_SELECT
+  fi
+fi

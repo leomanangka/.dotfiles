@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# path to hyprpaper config file
+HYPRPAPER_CONFIG="$HOME/.config/hypr/hyprpaper.conf"
+HYPRLOCK_CONFIG="$HOME/.config/hypr/hyprlock.conf"
+
+# path to wallpaper image
+WALLPAPER_IMG="$HOME/.config/backgrounds/"
+
+# check if argument was provided
+if [ -n "$1" ]; then
+  FILENAME="$1"
+else
+  FILENAME=$(find $WALLPAPER_IMG -type f | fzf --height 50% \
+    --border=sharp --margin 5% \
+    --bind "ctrl-r:reload(find $WALLPAPER_IMG -type f)" \
+    --preview='kitty icat --clear --transfer-mode=stream --stdin=no --unicode-placeholder --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}'\
+    --preview-window='border-sharp'\
+    --prompt="chwal> "\
+  )
+
+  if [ -z "$FILENAME" ]; then
+    echo "usage: chwall <filename>"
+    exit 1
+  fi
+fi
+
+# check if file does exist
+if [ ! -f "$FILENAME" ]; then
+  echo "file not found: $FILENAME"
+  exit 1
+fi
+
+# update the config file with the new wallpaper path
+sed -i "s|^preload = .*|preload = $FILENAME|" "$HYPRPAPER_CONFIG"
+sed -i "s|^wallpaper = .*|wallpaper = , $FILENAME|" "$HYPRPAPER_CONFIG"
+sed -i "s|^\$path = .*|\$path = $FILENAME|" "$HYPRLOCK_CONFIG"
+
+systemctl --user restart hyprpaper.service && \
+wal -n --cols16 -i $FILENAME && \
+systemctl --user restart waybar.service

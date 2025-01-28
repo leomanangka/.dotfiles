@@ -1,0 +1,97 @@
+@import "../../.cache/wal/colors-waybar.css";
+@define-color text @color15;
+@define-color background @color0;
+
+* {
+  min-height: 0;
+  font-family:
+    JetBrains Mono NL,
+    JetBrainsMonoNerd Font;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+window#waybar {
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  background-color: @background;
+  opacity: 0.8
+}
+
+window#waybar.hidden {
+  opacity: 0.5;
+}
+
+#workspaces {
+  background: @transparent;
+  margin: 2px 1px 3px 1px;
+  margin: 5px 5px;
+  border-radius: 0px;
+  border: 0px;
+  font-style: normal;
+  opacity: 1;
+  font-size: 16px;
+}
+
+#workspaces button {
+  padding: 1px 1px;
+  margin: 3px 3px;
+  border-radius: 15px;
+  border: 0px;
+  color: @text;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+#workspaces button.active {
+  background: @color1;
+  border-radius: 0px;
+  min-width: 40px;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+#workspaces button:hover {
+  background: #ffffff;
+  color: @color1;
+  animation: gradient_f 20s ease-in infinite;
+  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+}
+
+#workspaces button.urgent {
+  background-color: @color1;
+}
+
+#clock,
+#pulseaudio,
+#battery,
+#tray,
+#backlight,
+#window {
+  padding: 0px 8px;
+  margin: 6px 3px;
+  color: @text;
+  border-radius: 0px;
+  background-color: @transparent;
+}
+
+#tray {
+  font-size: 10px;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+
+#pulseaudio.muted {
+  color: @color3;
+}
+
+tooltip {
+  border-radius: 8px;
+  background: @background;
+}
+
+tooltip label {
+  color: @text
+}
