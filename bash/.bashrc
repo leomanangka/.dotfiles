@@ -26,6 +26,6 @@ alias rod='yay -Rs $(yay -Qdtq)'
 alias v='nvim'
 alias icat='kitty icat'
 alias ffex='. ffex'
-alias venvpio='. $HOME/.platformio/penv/bin/activate'
+alias venvpio='. $HOME/.platformio/penv/bin/activate && eval "$(_PIO_COMPLETE=bash_source pio)"'
 
 export PATH=$PATH:$HOME/.local/bin
