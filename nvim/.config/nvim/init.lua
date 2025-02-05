@@ -3,5 +3,5 @@
 require("alien.lazy")
 
 -- colorscheme
-vim.cmd("colorscheme tokyonight-night") -- available "kanagawa", "gruvbox", "tokyonight", "pywal"
-vim.o.background = "dark"      -- set to "dark" or "light" mode
+vim.cmd("colorscheme gruvbox") -- available "kanagawa", "gruvbox", "tokyonight"
+vim.o.background = "dark" -- set to "dark" or "light" mode
