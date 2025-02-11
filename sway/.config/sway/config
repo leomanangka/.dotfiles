@@ -19,8 +19,8 @@ set $menu wofi --dmenu --show drun
 set $lock swaylock -C ~/.config/swaylock/config
 
 # Window setting
-gaps inner 4
-gaps outer 4
+#gaps inner 4
+#gaps outer 4
 
 # these two lines removes the titlebar
 default_border pixel 2
