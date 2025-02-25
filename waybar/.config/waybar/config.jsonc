@@ -1,20 +1,20 @@
 {
   "layer": "top",
   "position": "top",
+  "height": 24,
   "spacing": 0,
   "exclusive": true,
   "gtk-layer-shell": true,
   "passthrough": false,
   "fixed-center": true,
   "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
-  //"modules-center": ["sway/window"],
+  "modules-center": ["clock"],
   "modules-right": [
     "idle_inhibitor",
     "pulseaudio",
     "backlight",
-    "network",
     "battery",
-    "clock",
+    "network",
     "tray",
   ],
 
@@ -37,19 +37,35 @@
 
   "sway/workspaces": {
     "disable-scroll": true,
-    "all-outputs": true,
-    "format": "{name}",
-    //    "persistent-workspaces": {
-    //      "*": [1, 2, 3, 4, 5],
-    //    },
+    "disable-click": true,
+    "all-outputs": false,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "🕹",
+      "4": "",
+      "5": "",
+      "10": "🖵",
+      "default": "",
+    },
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+    },
+    "sort-by-number": true,
   },
 
   "battery": {
     "interval": 1,
     "states": {
       "good": 90,
-      "warning": 30,
-      "critical": 15,
+      "warning": 20,
+      "urgent": 15,
+      "critical": 10,
     },
     "max-length": 20,
     "format": "{icon} {capacity}%",
