@@ -1,0 +1,21 @@
+# Set the default timeout to timeout in milliseconds.
+default-timeout=3000
+# If set, mako will ignore the expire timeout(value: 0|1 )
+ignore-timeout=0
+
+max-visible=3
+anchor=top-right
+font=Inconsolata 11
+
+icons=1
+markup=1
+
+padding=5
+
+background-color=#689d6a
+progress-color=#ebdbb2
+text-color=#1d2021
+
+border-color=#ebdbb2
+border-size=2
+border-radius=2

@@ -1,0 +1,5 @@
+### Autostart
+
+exec nm-applet --indicator
+exec blueman-applet
+exec mako -c $HOME/.config/mako/config

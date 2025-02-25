@@ -1,0 +1,57 @@
+# Window
+
+# Window Setting
+#gaps inner 4
+#gaps outer 4
+
+# these two lines removes the titlebar
+default_border pixel 2
+default_floating_border pixel 2
+
+# class					 border  backgr. text    indicator child_border
+client.focused           #3c3836 #d4be98 #1d2021 #3c3836   #3c3836
+client.focused_inactive  #282828 #282828 #ddc7a1 #282828   #282828
+client.unfocused		 #282828 #282828 #ddc7a1 #282828   #282828
+client.urgent			 #d8a657 #d8a657 #1d2021 #d8a657   #d8a657
+client.placeholder		 #7daea3 #7daea3 #1d2021 #7daea3   #7daea3
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# Open program on specific workspace
+
+# workspace 1 - browser
+assign [app_id="^firefox$"] 1
+# workspace 2 - mail
+assign [app_id="^thunderbird$"] 2
+# workspace 3 - gaming
+assign [app_id="lutris"] 3
+assign [title="(HoYoPlay|Torchlight II Mod Launcher|Torchlight II v.1.25.5.4)"] 3
+assign [title="(HyperLightDrifter|LogicBots)"] 3
+assign [class="(^steam_app_[0-9]+$|^steam_app_[a-zA-Z]+$|^steam$)"] 3
+# workspace 4 - discord
+assign [class="^discord$"] 4
+# workspace 5 - work
+assign [app_id="tmux"] 5
+assign [class="^KiCad$"] 5
+# workspace 10 - monitor
+assign [app_id="btop"] 10
+
+# Auto float apps
+for_window [app_id="pavucontrol"] floating enable, resize set 600 400
+for_window [app_id="^kitty$"] floating enable, resize set 1280 720
+for_window [app_id="chwal"] floating enable, resize set 800 600
+for_window [app_id="nm-connection-editor$"] floating enable
+
+# default floating
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [instance="update_installer"] floating enable

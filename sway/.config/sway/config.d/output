@@ -1,0 +1,6 @@
+### Output configuration
+
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output eDP-1 mode 1920x1080@60Hz
+output "*" bg /home/alien/.config/backgrounds/gruvbox_robot-gundam1.jpg fill
+# You can get the names of your outputs by running: swaymsg -t get_outputs
