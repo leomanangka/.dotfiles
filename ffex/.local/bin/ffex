@@ -2,49 +2,84 @@
 
 # THIS FILE SHOULD BE SOURCED
 
-FILE_SELECT="$(find -type d | fzf --multi --height 80% --border=sharp\
-  --preview-window border-sharp --preview-label='[ DIRECTORY ]'\
-  --preview='tree -C {}'\
-  --prompt='Dirs> '\
-  --bind='?:toggle-preview'\
-  --bind='ctrl-d:change-prompt(Dirs> )'\
-  --bind='ctrl-d:+reload(find -type d)'\
-  --bind='ctrl-d:+change-preview(tree -C {})'\
-  --bind='ctrl-d:+refresh-preview'\
-  --bind='ctrl-f:change-prompt(File> )'\
-  --bind='ctrl-f:+reload(find -type f)'\
-  --bind='ctrl-f:+change-preview(if [[ {} == *.jpg || {} == *.png ]]; then
-  kitty icat --clear --transfer-mode=stream --stdin=no --unicode-placeholder --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}
-else
-  cat {}
-  fi)'\
-  --bind='ctrl-f:+change-preview-label([ FILE ])'\
-  --bind='ctrl-f:+refresh-preview'\
-  --bind='del:execute(rm -ri {+})'\
-  --bind='ctrl-a:select-all'\
-  --bind='ctrl-x:deselect-all'\
-  --header '
-  [CTRL-D] show directories | [CTRL-F] show files | [CTRL-A] select all
-  [CTRL-X] deselect all     | [?] toggle preview  | [DEL] delete
-  [CTRL-C or ESC] exit
-  '
-  )"
+SRC_DIR="${1:-./}"
+
+SELECTION="$(find ${SRC_DIR} -type d ! -path '*.git*' 2>&1 | grep -v "Permission denied" | fzf --multi \
+  --height=90% \
+  --margin=5%,5% \
+  --layout=reverse \
+  --border=sharp \
+  --border-label "[ ffex ]" \
+  --info=default \
+  --prompt=" > " \
+  --pointer="" \
+  --marker="󰓾" \
+  --header-first \
+  --color="dark,fg+:#F564A9,fg:#FAE3C6,query:#F564A9,border:#FAA4BD,\
+  prompt:#FAE3C6,info:#FAE3C6,header:#FAA4BD,label:#FAA4BD,bg+:#533B4D,\
+  hl:#F564A9,hl+:#FAE3C6" \
+  --preview="tree -C {}" \
+  --preview-window=45%,border-sharp,cycle \
+  --preview-label="[ Directories ]" \
+  --bind="del:execute(rm -ri {+})" \
+  --bind="?:toggle-preview" \
+  --bind="ctrl-d:change-prompt( > )" \
+  --bind="ctrl-d:+reload(find ${SRC_DIR} -type d ! -path '*.git*')" \
+  --bind="ctrl-d:+change-preview(tree -C {})" \
+  --bind="ctrl-d:+change-preview-label([ Directories ])" \
+  --bind="ctrl-d:+refresh-preview" \
+  --bind="ctrl-f:change-prompt( > )" \
+  --bind="ctrl-f:+reload(find ${SRC_DIR} -type f ! -path '*.git*')" \
+  --bind='ctrl-f:+change-preview(
+    case {} in
+      *.jpg|*.jpeg|*.png|*.gif|*.bmp|*.tiff|*.tif|*.webp|*.avif|*.heic|*.heif)
+        kitty icat --clear --transfer-mode=stream --stdin=no --unicode-placeholder --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}
+        ;;
+      *.webm|*.mkv|*.flv|*.vob|*.ogv|*.ogg|*.rrc|*.gifv|*.mng|*.mov|*.avi|*.qt|*.wmv|*.yuv|*.rm|*.asf|*.amv|*.mp4|*.m4p|*.m4v|*.mpg|*.mp2|*.mpeg|*.mpe|*.mpv|*.svi|*.3gp|*.3g2|*.mxf|*.roq|*.nsv|*.f4v|*.f4p|*.f4a|*.f4b|*.mod)
+        mpv --no-config --vo=tct --quiet --force-window=no --terminal --loop-file=inf --no-audio {}
+        ;;
+      *) echo default
+        bat --style numbers,changes --color=always {}
+        ;;
+    esac
+    )' \
+  --bind="ctrl-f:+change-preview-label([ Files ])" \
+  --bind="ctrl-f:+refresh-preview" \
+  --bind="ctrl-a:select-all" \
+  --bind="ctrl-x:deselect-all" \
+  --header="
+CTRL-c or ESC to Quit      | DEL To Delete File(s)
+CTRL-d Display Directories | CTRL-f Display File(s)
+CTRL-a Select All          | CTRL-x Deselect All
+")"
 
 # no selection do nothing
-if [ -z "$FILE_SELECT" ]; then
+if [ -z "$SELECTION" ]; then
   return 0
 fi
 
+FIRST_SELECTION=""
 # handle multiple select
-if [ -n "$FILE_SELECT" ]; then
+if [ -n "$SELECTION" ]; then
   # for directory it will choose first selection 
-  FIRST_DIR=$(echo "$FILE_SELECT" | sed -n '1p')
+  FIRST_SELECTION=$(echo "$SELECTION" | sed -n '1p')
+fi
 
-  if [ -d "$FIRST_DIR" ]; then
-    cd "$FIRST_DIR" || exit
-  elif [[ -f "$FILE_SELECT" && ("${FILE_SELECT##*.}" == "jpg" || "${FILE_SELECT##*.}" == "png") ]]; then
-    ristretto "$FILE_SELECT" || exit
-  else
-    eval $EDITOR $FILE_SELECT
-  fi
+if [ -d "$FIRST_SELECTION" ]; then
+  cd "$FIRST_SELECTION" || exit
+fi
+
+
+if [[ -f "$FIRST_SELECTION" ]]; then
+  case "${FIRST_SELECTION##*.}" in
+    jpg|jpeg|png|gif|bmp|tiff|tif|webp|avif|heic|heif)
+      icat "$FIRST_SELECTION" || exit
+      ;;
+    webm|mkv|flv|vob|ogv|ogg|rrc|gifv|mng|mov|avi|qt|wmv|yuv|rm|asf|amv|mp4|m4p|m4v|mpg|mp2|mpeg|mpe|mpv|svi|3gp|3g2|mxf|roq|nsv|f4v|f4p|f4a|f4b|mod)
+      mpv "$FIRST_SELECTION" || exit
+      ;;
+    *)
+      v $SELECTION
+      ;;
+  esac
 fi
