@@ -24,28 +24,40 @@ floating_modifier $mod normal
 
 # Open program on specific workspace
 
-# workspace 1 - browser
-assign [app_id="^firefox$"] 1
-# workspace 2 - mail
-assign [app_id="^thunderbird$"] 2
-# workspace 3 - gaming
-assign [app_id="lutris"] 3
-assign [title="(HoYoPlay|Torchlight II Mod Launcher|Torchlight II v.1.25.5.4)"] 3
-assign [title="(HyperLightDrifter|LogicBots)"] 3
-assign [class="(^steam_app_[0-9]+$|^steam_app_[a-zA-Z]+$|^steam$)"] 3
-# workspace 4 - discord
-assign [class="^discord$"] 4
-# workspace 5 - work
-assign [app_id="tmux"] 5
-assign [class="^KiCad$"] 5
+# workspace 1 - terminal
+assign [app_id="tmux"] 1
+
+# workspace 2 - browser
+assign [class="^Brave-browser$"] 2
+
+# workspace 3 - mail
+assign [app_id="^thunderbird$"] 3
+
+# workspace 4 - entertainment
+assign [app_id="lutris"] 4
+assign [title="(HoYoPlay|Torchlight II Mod Launcher|Torchlight II v.1.25.5.4)"] 4
+assign [title="(HyperLightDrifter|LogicBots)"] 4
+assign [class="(^steam_app_[0-9]+$|^steam_app_[a-zA-Z]+$|^steam$)"] 4
+assign [app_id="^mpv"] 4
+
+# workspace 5 - social and meeting
+assign [class="^discord$"] 5
+assign [class="^zoom$"] 5
+
+# workspace 6 - work
+assign [class="^KiCad$"] 6
+
+# workspace 9 - virtualization
+assign [app_id="virt-manager"] 9
 # workspace 10 - monitor
 assign [app_id="btop"] 10
 
 # Auto float apps
-for_window [app_id="pavucontrol"] floating enable, resize set 600 400
+for_window [app_id="pavucontrol"] floating enable, resize set 800 640
 for_window [app_id="^kitty$"] floating enable, resize set 1280 720
-for_window [app_id="chwal"] floating enable, resize set 800 600
+for_window [app_id="chwal"] floating enable, resize set 800 640
 for_window [app_id="nm-connection-editor$"] floating enable
+for_window [app_id="blueman-manager$"] floating enable, resize set 800 640
 
 # default floating
 for_window [window_role="pop-up"] floating enable

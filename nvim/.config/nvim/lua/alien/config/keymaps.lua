@@ -100,9 +100,6 @@ keymap("n", "<leader>1", "<cmd>CellularAutomaton make_it_rain<cr>", {})
 keymap("n", "<leader>2", "<cmd>CellularAutomaton scramble<cr>", {})
 keymap("n", "<leader>3", "<cmd>CellularAutomaton game_of_life<cr>", {})
 
--- Terminal
-keymap("t", "<esc>", [[<C-\><C-n>]], { noremap = true })
-
 -- Gitsigns
 keymap("n", "<leader>gj", "<cmd>Gitsigns next_hunk<cr>", opts)
 keymap("n", "<leader>gk", "<cmd>Gitsigns prev_hunk<cr>", opts)
@@ -116,3 +113,6 @@ keymap("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", opts)
 
 -- Replace Space more than 1 to TAB
 keymap("n", "<leader>t", ":%s/^[ ]\\+/\t/g<CR>", opts)
+
+-- Vivify
+keymap("n", "<C-s>", "<cmd>Vivify<cr>", opts)

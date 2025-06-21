@@ -41,13 +41,15 @@
     "all-outputs": false,
     "format": "{icon}",
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "🕹",
-      "4": "",
-      "5": "",
-      "10": "🖵",
-      "default": "",
+      "1": "",
+      "2": "󰖟",
+      "3": "󰶍",
+      "4": "",
+      "5": "",
+      "6": "󱤓",
+      "9": "󰪫",
+      "10": "󰨇",
+      "default": "󰣘",
     },
     "persistent-workspaces": {
       "1": [],
@@ -119,10 +121,10 @@
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
     "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip-format": "{ifname} via {gwaddr} ",
-    "format-linked": "{ifname} (No IP) ",
-    "format-disconnected": "Disconnected ⚠",
+    "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+    "tooltip-format": "{ifname} via {gwaddr} 󰈀",
+    "format-linked": "{ifname} (No IP) 󰈀",
+    "format-disconnected": "Disconnected ",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
 }

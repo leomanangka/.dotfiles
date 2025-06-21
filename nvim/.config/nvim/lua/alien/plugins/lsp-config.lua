@@ -17,6 +17,7 @@ return {
 					"lua_ls",
 					"clangd",
 					"typos_lsp",
+					"pylsp",
 				},
 			})
 		end,
@@ -78,6 +79,9 @@ return {
 				capabilities = cap,
 			})
 			lspconfig.gopls.setup({
+				capabilities = cap,
+			})
+			lspconfig.postgrestools.setup({
 				capabilities = cap,
 			})
 		end,

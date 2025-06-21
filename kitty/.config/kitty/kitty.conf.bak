@@ -26,7 +26,7 @@ enable_audio_bell no
 
 # color
 term xterm-256color
-background_opacity   0.85
+background_opacity   0.8
 
 # mouse key map
 clear_all_mouse_actions yes
@@ -78,6 +78,6 @@ map ctrl+shift+z toggle_layout grid
 
 
 # BEGIN_KITTY_THEME
-# Gruvbox Dark
+# Default
 include current-theme.conf
 # END_KITTY_THEME

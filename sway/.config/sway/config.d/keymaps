@@ -11,7 +11,7 @@ set $term kitty
 # Set application launcher
 set $menu wofi --dmenu --show drun
 # Set browser
-set $browser firefox
+set $browser brave
 # Set email-client
 set $mail thunderbird
 # Swaylock
@@ -165,12 +165,13 @@ bindsym $mod+r mode "resize"
 
 # Application
 bindsym $mod+Return exec $term
-bindsym $mod+Alt+w exec $browser
 bindsym $mod+d exec "pgrep -x wofi >/dev/null 2>&1 && killall wofi || $menu"
 bindsym $mod+m exec $mail
 bindsym $mod+g exec steam
-bindsym $mod+Alt+g exec flatpak run net.lutris.Lutris
 bindsym $mod+c exec discord
 bindsym $mod+o exec kitty --class btop -e btop
 bindsym $mod+t exec kitty --class tmux -e tmux
+
+bindsym $mod+Alt+w exec $browser
 bindsym $mod+Alt+p exec kitty --class chwal -e chwal
+bindsym $mod+Alt+k exec flatpak run org.kicad.KiCad
