@@ -35,8 +35,6 @@ assign [app_id="^thunderbird$"] 3
 
 # workspace 4 - entertainment
 assign [app_id="lutris"] 4
-assign [title="(HoYoPlay|Torchlight II Mod Launcher|Torchlight II v.1.25.5.4)"] 4
-assign [title="(HyperLightDrifter|LogicBots)"] 4
 assign [class="(^steam_app_[0-9]+$|^steam_app_[a-zA-Z]+$|^steam$)"] 4
 assign [app_id="^mpv"] 4
 

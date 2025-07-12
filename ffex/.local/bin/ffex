@@ -51,6 +51,7 @@ SELECTION="$(find ${SRC_DIR} -type d ! -path '*.git*' 2>&1 | grep -v "Permission
 CTRL-c or ESC to Quit      | DEL To Delete File(s)
 CTRL-d Display Directories | CTRL-f Display File(s)
 CTRL-a Select All          | CTRL-x Deselect All
+? to Toggle Preview
 ")"
 
 # no selection do nothing

@@ -11,7 +11,7 @@ set $term kitty
 # Set application launcher
 set $menu wofi --dmenu --show drun
 # Set browser
-set $browser brave
+set $browser brave -n --args --no-experiments --disable-gpu
 # Set email-client
 set $mail thunderbird
 # Swaylock
@@ -175,3 +175,5 @@ bindsym $mod+t exec kitty --class tmux -e tmux
 bindsym $mod+Alt+w exec $browser
 bindsym $mod+Alt+p exec kitty --class chwal -e chwal
 bindsym $mod+Alt+k exec flatpak run org.kicad.KiCad
+bindsym $mod+Alt+g exec flatpak run net.lutris.Lutris
+
