@@ -34,8 +34,6 @@ assign [class="^Brave-browser$"] 2
 assign [app_id="^thunderbird$"] 3
 
 # workspace 4 - entertainment
-assign [app_id="lutris"] 4
-assign [class="(^steam_app_[0-9]+$|^steam_app_[a-zA-Z]+$|^steam$)"] 4
 assign [app_id="^mpv"] 4
 
 # workspace 5 - social and meeting
