@@ -1,7 +1,6 @@
 -- main requirement
--- example: require("user.lazy")
-require("alien.lazy")
+require("config")
 
 -- colorscheme
-vim.cmd("colorscheme gruvbox") -- available "kanagawa", "gruvbox", "tokyonight"
+vim.cmd("colorscheme gruvbox")
 vim.o.background = "dark" -- set to "dark" or "light" mode
