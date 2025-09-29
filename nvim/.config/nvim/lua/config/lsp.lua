@@ -1,7 +1,11 @@
 -- enable lsp client
 vim.lsp.enable({
   "lua_ls",
-  "clangd"
+  "clangd",
+  "gopls",
+  "hyprls",
+  "pylsp",
+  "bashls"
 })
 
 -- lsp diagnostic
@@ -71,7 +75,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client_id == nil then
       return
     end
-    vim.lsp.completion.enable(true, client_id, event.buf, { autotrigger = false })
+    vim.lsp.completion.enable(true, client_id, event.buf, { autotrigger = true })
   end
 })
 
