@@ -1,0 +1,8 @@
+# THEME
+theme = Gruvbox Dark
+
+# Cursor
+cursor-style = block
+shell-integration-features = no-cursor
+
+# KEYBINDING
