@@ -1,91 +1,51 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 24,
   "spacing": 0,
   "exclusive": true,
-  "gtk-layer-shell": true,
   "passthrough": false,
   "fixed-center": true,
-  "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
-  "modules-center": ["clock"],
-  "modules-right": [
+  "gtk-layer-shell": true,
+  "modules-left": [
     "idle_inhibitor",
+    "hyprland/workspaces",
+    "hyprland/submap"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "network",
     "pulseaudio",
+    //"pulseaudio-slider",
     "backlight",
     "battery",
-    "network",
-    "tray",
+    "tray"
   ],
 
-  "tray": {
-    "show-passive-items": true,
-    "spacing": 10,
+  "clock": {
+    "format": "<span> </span> {:%I:%M:%S %p}",
+    "interval": 1,
+    "format-alt": "<span> </span> {:%A, %b %d}",
+    "tooltip-format": "<tt>{calendar}</tt>"
   },
-
-  "sway/mode": {
-    "format": "<span style=\"italic\">{}</span>",
-  },
-
-  "sway/scratchpad": {
-    "format": "{icon} {count}",
-    "show-empty": false,
-    "format-icons": ["", ""],
-    "tooltip": true,
-    "tooltip-format": "{app}: {title}",
-  },
-
-  "sway/workspaces": {
+  "hyprland/workspaces": {
     "disable-scroll": true,
-    "disable-click": true,
     "all-outputs": false,
+    "sort-by-number": true
+  },
+  "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "1": "",
-      "2": "󰖟",
-      "3": "󰶍",
-      "4": "",
-      "5": "",
-      "6": "󱤓",
-      "9": "󰪫",
-      "10": "󰨇",
-      "default": "󰣘",
-    },
-    "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": [],
-    },
-    "sort-by-number": true,
+      "activated": "<span foreground='#b8bb26'>󰈈</span>",
+      "deactivated": "<span foreground='#d3869b'>󰈉</span>"
+    }
   },
-
-  "battery": {
-    "interval": 1,
-    "states": {
-      "good": 90,
-      "warning": 20,
-      "urgent": 15,
-      "critical": 10,
-    },
-    "max-length": 20,
-    "format": "{icon} {capacity}%",
-    "format-warning": "{icon} {capacity}%",
-    "format-critical": "{icon} {capacity}%",
-    "format-charging": "<span foreground='#26ff55'> {capacity} %</span>",
-    "format-plugged": "<span foreground='#26ff55'>  {capacity}%</span>",
-    "format-alt": "{icon} {time}",
-    "format-full": "<span foreground='#26ff55'> {capacity} %</span>",
-    "format-icons": [" ", " ", " ", " ", " "],
+  "hyprland/submap": {
+    "format": "{}",
+    "max-length": 8,
+    "tooltip": false
   },
-
-  "clock": {
-    "format": "<span> </span> | {:%I:%M %p}",
-    "format-alt": "<span> </span> | {:%a %b %d}",
-    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
-  },
-
   "pulseaudio": {
     "format": "{icon} {volume}% {format_source}",
     "format-bluetooth": "{icon} {volume}% {format_source}",
@@ -102,29 +62,48 @@
       "car": "",
       "default": [" ", " ", " "],
     },
-    "on-click": "pavucontrol",
+     "on-click": "pavucontrol",
   },
-
+ //  "pulseaudio/slider": {
+ //    "min": 0,
+ //    "max": 100,
+ //    "orientation": "horizontal"
+ //  },
   "backlight": {
     "format": "{percent}% {icon}",
-    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "format-icons": ["", "", "", "", "", "", "", "", ""]
   },
-
-  "idle_inhibitor": {
-    "format": "{icon}",
-    "format-icons": {
-      "activated": "",
-      "deactivated": "",
+  "battery": {
+    "interval": 1,
+    "states": {
+      "good": 90,
+      "warning": 20,
+      "urgent": 15,
+      "critical": 10
     },
+    "max-length": 20,
+    "format": "{icon} {capacity}%",
+    "format-warning": "{icon} {capacity}%",
+    "format-critical": "{icon} {capacity}%",
+    "format-charging": "<span>󰂄 {capacity} %</span>",
+    "format-plugged": "<span>  {capacity}%</span>",
+    "format-alt": "{icon} {time}",
+    "format-full": "<span> {capacity}%</span>",
+    "format-icons": [" ", " ", " ", " ", " "]
   },
-
   "network": {
-    // "interface": "wlp2*", // (Optional) To force the use of this interface
-    "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "{ipaddr}/{cidr} 󰈀",
-    "tooltip-format": "{ifname} via {gwaddr} 󰈀",
-    "format-linked": "{ifname} (No IP) 󰈀",
-    "format-disconnected": "Disconnected ",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "tooltip": true,
+    "format-wifi": "  {essid} ({signalStrength}%)",
+    "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+    "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+    "format-linked": "󰈀 {ifname} (No IP)",
+    "format-disconnected": "󰖪 ",
+    "tooltip-format-disconnected": "Disconnected",
+    "format-alt": "<span> {bandwidthDownBytes}</span> <span> {bandwidthUpBytes}</span>",
+    "interval": 1
   },
+  "tray": {
+    "show-passive-items": true,
+    "spacing": 10
+  }
 }

@@ -1,10 +1,11 @@
 * {
+  /* `otf-font-awesome` is required to be installed for icons */
   border: none;
   border-radius: 0;
   min-height: 0;
-  font-family: "iosevka nerd font";
-  font-weight: 500;
+  font-family: "JetbrainsMono Nerd Font";
   font-size: 14px;
+  font-weight: 600;
   padding: 0;
 }
 
@@ -15,27 +16,68 @@ window#waybar {
 }
 
 tooltip {
-  background-color: #1d2021;
-  border: 2px solid #7c6f64;
+  background-color: #3c3836;
+  border: 2px solid #ebdbb2;
+  color: #ebdbb2;
 }
 
-#idle_inhibitor,
-#backlight,
-#clock,
-#tray,
-#network,
-#battery,
-#pulseaudio {
-  margin: 6px 6px 6px 0px;
+/*#pulseaudio-slider {
+  margin: 6px 0px 6px 6px;
+  padding: 2px 8px;
+}*/
+
+#idle_inhibitor {
+  margin: 6px 0px 6px 6px;
   padding: 2px 8px;
 }
 
-#mode,
-#scratchpad,
-#workspaces {
-  background-color: #303536;
+#submap,
+#clock,
+#pulseaudio,
+#backlight,
+#network,
+#battery {
   margin: 6px 0px 6px 6px;
-  border: 2px solid #434a4c;
+  padding: 2px 8px;
+  background-color: #3c3836;
+}
+
+#submap {
+  color: #fabd2f;
+  font-style: italic;
+}
+
+#tray {
+  background-color: #3c3836;
+  margin: 6px 6px 6px 6px;
+  padding: 2px 8px;
+}
+
+#backlight {
+  color: #fabd2f;
+}
+
+#network {
+  color: #fe8019;
+}
+
+/*#pulseaudio-slider {
+  background-color: #b16286;
+  border: 2px solid #d3869b;
+}*/
+
+#pulseaudio {
+  color: #fb4934;
+}
+
+#clock {
+  color: #83a598;
+}
+
+#workspaces {
+  background-color: #3c3836;
+  margin: 6px 0px 6px 6px;
+  transition: none;
 }
 
 #workspaces button {
@@ -45,54 +87,54 @@ tooltip {
   padding-bottom: 2px;
   padding-left: 10px;
   padding-right: 10px;
-  color: #c7ab7a;
+  /*color: #c7ab7a;*/
+  /*color: #1d2021;*/
+  color: #ebdbb2;
 }
 
-#workspaces button.focused {
-  border-color: #cc241d;
-  color: #ddc7a1;
-  /*background-color: #458588;*/
+#workspaces button.active {
+  border-color: #fb4934;
+  /*color: #ddc7a1;*/
+  /*color: #1d2021;*/
+  color: #ebdbb2;
 }
 
 #workspaces button.urgent {
   color: #cc241d;
 }
 
-#clock,
-#network,
-#tray {
-  background-color: #303536;
-  border: 2px solid #434a4c;
-  color: #d4be98;
+/*#pulseaudio-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
 }
-
-#backlight,
-#pulseaudio {
-  background-color: #ddc7a1;
-  border: 2px solid #c7ab7a;
-  color: #1d2021;
+#pulseaudio-slider trough {
+    min-height: 10px;
+    min-width: 80px;
+    border-radius: 5px;
+    background-color: black;
 }
+#pulseaudio-slider highlight {
+    min-width: 10px;
+    border-radius: 5px;
+    background-color: #fe8019;
+}*/
 
 #battery {
-  background-color: #a9b665;
-  border: 2px solid #c7ab7a;
-  color: #1d2021;
+  color: #8ec07c;
 }
 
 #battery.warning {
-  background-color: #fabd2f;
-  border: 2px solid #d79921;
-  color: #1d2021;
+  color: #fabd2f;
 }
 
 #battery.critical {
-  background-color: #fb4934;
-  border: 2px solid #cc241d;
-  color: #1d2021;
+  color: #cc241d;
 }
 
 #battery.urgent {
-  background-color: #fe8019;
-  border: 2px solid #d65d0e;
-  color: #1d2021;
+  color: #fe8019;
 }

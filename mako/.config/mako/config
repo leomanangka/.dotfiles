@@ -12,10 +12,47 @@ markup=1
 
 padding=5
 
-background-color=#689d6a
-progress-color=#ebdbb2
-text-color=#1d2021
+background-color=#3c3836
+progress-color=#689d6a
+text-color=#ebdbb2
 
-border-color=#ebdbb2
+border-color=#83a598
 border-size=2
 border-radius=2
+
+[mode=do-not-disturb]
+invisible=1
+
+[app-name=wp-vol]
+layer=overlay
+history=0
+anchor=top-right
+# Group all volume notifications together
+group-by=app-name
+# Hide the group-index
+format=<b>%s</b>\n%b
+
+[app-name=volume group-index=0]
+# Only show last notification
+invisible=0
+
+[app-name=volume grouped=false]
+# Force initial volume notification to be visible
+invisible=0
+
+[app-name=brightness]
+layer=overlay
+history=0
+anchor=top-right
+# Group all volume notifications together
+group-by=app-name
+# Hide the group-index
+format=<b>%s</b>\n%b
+
+[app-name=brightness group-index=0]
+# Only show last notification
+invisible=0
+
+[app-name=brightness grouped=false]
+# Force initial volume notification to be visible
+invisible=0
