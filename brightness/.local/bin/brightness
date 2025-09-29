@@ -1,0 +1,7 @@
+#!/bin/bash
+
+brght_curr_val=$(brightnessctl g)
+brght_max_val=$(brightnessctl m)
+brght_percentage=$(echo "scale=2; ($brght_curr_val / $brght_max_val) * 100" | bc)
+
+notify-send -t 1000 -a 'brightness' -h int:value:$brght_percentage "Brightness: ${brght_percentage}%"
