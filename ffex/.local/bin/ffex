@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # THIS FILE SHOULD BE SOURCED
 
@@ -15,72 +15,78 @@ SELECTION="$(find ${SRC_DIR} -type d ! -path '*.git*' 2>&1 | grep -v "Permission
   --pointer="" \
   --marker="󰓾" \
   --header-first \
-  --color="dark,fg+:#F564A9,fg:#FAE3C6,query:#F564A9,border:#FAA4BD,\
-  prompt:#FAE3C6,info:#FAE3C6,header:#FAA4BD,label:#FAA4BD,bg+:#533B4D,\
-  hl:#F564A9,hl+:#FAE3C6" \
+  --color="dark,\
+  fg+:#FABD2F,\
+  fg:#EBDBB2,\
+  query:#FE8019,\
+  border:#928374,\
+  prompt:#B8BB26,\
+  info:#EBDBB2,\
+  header:#B16286,\
+  label:#B16286,\
+  bg+:#282828,\
+  hl:#FB4934,\
+  hl+:#FABD2F" \
   --preview="tree -C {}" \
   --preview-window=45%,border-sharp,cycle \
-  --preview-label="[ Directories ]" \
+  --preview-label="[ Directory ]" \
   --bind="del:execute(rm -ri {+})" \
   --bind="?:toggle-preview" \
   --bind="ctrl-d:change-prompt( > )" \
-  --bind="ctrl-d:+reload(find ${SRC_DIR} -type d ! -path '*.git*')" \
+  --bind="ctrl-d:+reload(find ${SRC_DIR} -type d ! -path '*.git*' 2>&1 | grep -v 'Permission denied')" \
   --bind="ctrl-d:+change-preview(tree -C {})" \
-  --bind="ctrl-d:+change-preview-label([ Directories ])" \
+  --bind="ctrl-d:+change-preview-label([ Directory ])" \
   --bind="ctrl-d:+refresh-preview" \
   --bind="ctrl-f:change-prompt( > )" \
-  --bind="ctrl-f:+reload(find ${SRC_DIR} -type f ! -path '*.git*')" \
+  --bind="ctrl-f:+reload(find ${SRC_DIR} -type f ! -path '*.git*' 2>&1 | grep -v 'Permission denied')" \
   --bind='ctrl-f:+change-preview(
     case {} in
       *.jpg|*.jpeg|*.png|*.gif|*.bmp|*.tiff|*.tif|*.webp|*.avif|*.heic|*.heif)
         kitty icat --clear --transfer-mode=stream --stdin=no --unicode-placeholder --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}
         ;;
-      *.webm|*.mkv|*.flv|*.vob|*.ogv|*.ogg|*.rrc|*.gifv|*.mng|*.mov|*.avi|*.qt|*.wmv|*.yuv|*.rm|*.asf|*.amv|*.mp4|*.m4p|*.m4v|*.mpg|*.mp2|*.mpeg|*.mpe|*.mpv|*.svi|*.3gp|*.3g2|*.mxf|*.roq|*.nsv|*.f4v|*.f4p|*.f4a|*.f4b|*.mod)
-        mpv --no-config --vo=tct --quiet --force-window=no --terminal --loop-file=inf --no-audio {}
-        ;;
-      *) echo default
+      *)
         bat --style numbers,changes --color=always {}
         ;;
     esac
     )' \
-  --bind="ctrl-f:+change-preview-label([ Files ])" \
+  --bind="ctrl-f:+change-preview-label([ File ])" \
   --bind="ctrl-f:+refresh-preview" \
   --bind="ctrl-a:select-all" \
   --bind="ctrl-x:deselect-all" \
   --header="
-CTRL-c or ESC to Quit      | DEL To Delete File(s)
-CTRL-d Display Directories | CTRL-f Display File(s)
-CTRL-a Select All          | CTRL-x Deselect All
-? to Toggle Preview
+CTRL-c or ESC: Quit           │ DEL   : Delete File
+CTRL-d       : Show Directory │ CTRL-f: Show File
+CTRL-a       : Select All     │ CTRL-x: Deselect All
+?            : Toggle Preview │
 ")"
 
 # no selection do nothing
-if [ -z "$SELECTION" ]; then
+if [[ -z "${SELECTION}" ]]; then
   return 0
 fi
 
 FIRST_SELECTION=""
 # handle multiple select
-if [ -n "$SELECTION" ]; then
+if [[ -n "${SELECTION}" ]]; then
   # for directory it will choose first selection 
-  FIRST_SELECTION=$(echo "$SELECTION" | sed -n '1p')
+  FIRST_SELECTION=$(echo "${SELECTION}" | sed -n '1p')
 fi
 
-if [ -d "$FIRST_SELECTION" ]; then
-  cd "$FIRST_SELECTION" || exit
+if [[ -d "${FIRST_SELECTION}" ]]; then
+  cd "${FIRST_SELECTION}" || return 0
 fi
 
 
-if [[ -f "$FIRST_SELECTION" ]]; then
+if [[ -f "${FIRST_SELECTION}" ]]; then
   case "${FIRST_SELECTION##*.}" in
     jpg|jpeg|png|gif|bmp|tiff|tif|webp|avif|heic|heif)
-      icat "$FIRST_SELECTION" || exit
+      icat "${FIRST_SELECTION}" || return 0
       ;;
     webm|mkv|flv|vob|ogv|ogg|rrc|gifv|mng|mov|avi|qt|wmv|yuv|rm|asf|amv|mp4|m4p|m4v|mpg|mp2|mpeg|mpe|mpv|svi|3gp|3g2|mxf|roq|nsv|f4v|f4p|f4a|f4b|mod)
-      mpv "$FIRST_SELECTION" || exit
+      mpv "${FIRST_SELECTION}" || return 0
       ;;
     *)
-      v $SELECTION
+      v "${SELECTION}"
       ;;
   esac
 fi
