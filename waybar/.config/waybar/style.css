@@ -27,7 +27,7 @@ tooltip {
 }*/
 
 #idle_inhibitor {
-  margin: 6px 0px 6px 6px;
+  margin: 6px 6px 6px 0px;
   padding: 2px 8px;
 }
 
@@ -49,7 +49,7 @@ tooltip {
 
 #tray {
   background-color: #3c3836;
-  margin: 6px 6px 6px 6px;
+  margin: 6px 0px 6px 6px;
   padding: 2px 8px;
 }
 
