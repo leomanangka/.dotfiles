@@ -5,7 +5,8 @@ vim.lsp.enable({
   "gopls",
   "hyprls",
   "pylsp",
-  "bashls"
+  "bashls",
+  "docker_language_server"
 })
 
 -- lsp diagnostic

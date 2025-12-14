@@ -45,7 +45,7 @@ local function tab_complete()
   local c = vim.fn.col(".") - 1
   local is_whitespace = c == 0 or vim.fn.getline("."):sub(c, c):match("%s")
   if is_whitespace then
-    -- insert tan
+    -- insert tab
     return "<Tab>"
   end
 
@@ -73,7 +73,7 @@ vim.keymap.set("i", "<Tab>", tab_complete,
 vim.keymap.set("i", "<S-Tab>", tab_prev, { expr = true, desc = "Select previous item in completion menu" })
 
 -- trigger lsp completion manually using ctrl + space
-keymap("i", "<C-space>", "<cmd>lua vim.lsp.completion.get()<cr>", "Trigger LSP completion ")
+-- keymap("i", "<C-space>", "<cmd>lua vim.lsp.completion.get()<cr>", "Trigger LSP completion ")
 
 -- lsp diagnostic
 keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>",
@@ -122,7 +122,8 @@ keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", "Telescope open live g
 keymap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", "Telescope open list of active buffers")
 keymap("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", "Telescope open list of old files")
 keymap("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", "Telescope open list of LSP document symbols")
-keymap("n", "<leader>fS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Telescope open list of LSP dynamic workspace symbols")
+keymap("n", "<leader>fS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+  "Telescope open list of LSP dynamic workspace symbols")
 
 keymap("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", "Telescope open list of help tags")
 keymap("n", "<leader>fm", "<cmd>Telescope man_pages<cr>", "Telescope open list of manual pages")
