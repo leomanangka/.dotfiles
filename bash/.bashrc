@@ -14,6 +14,9 @@ PROMPT_DIRTRIM=1
 
 #PS1='\[\033[01;91m\]⟩\[\033[00m\] '
 
+# Activate vi mode
+#set -o vi
+
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias ll='ls -lah'
@@ -25,14 +28,20 @@ alias cod='yay -Qdtq'
 alias rod='yay -Rs $(yay -Qdtq)'
 
 alias v='nvim'
-#alias icat='kitty icat'
-#alias ffex='. ffex'
+alias icat='kitty icat'
+alias ffex='. ffex'
 #alias venvpio='. $HOME/.platformio/penv/bin/activate'
 #alias hibernate='systemctl hibernate'
 
+# Environment
 export PATH=$PATH:$HOME/.local/bin
+export VISUAL=vim
+export EDITOR=vim
+export GIT_EDITOR=vim
+
 # go setup
 export GOBIN=$HOME/.local/bin
 export GOPATH=$HOME/.local/share/go
+
 #eval "$(_AUTO_CPUFREQ_COMPLETE=bash_source auto-cpufreq)"
 #export LIBVIRT_DEFAULT_URI='qemu:///system'
