@@ -3,6 +3,38 @@ theme = Gruvbox Dark
 
 # Cursor
 cursor-style = block
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor,ssh-terminfo
+mouse-hide-while-typing = true
 
-# KEYBINDING
+# More History
+scrollback-limit = 3000000
+
+# Window
+window-padding-balance = true
+
+###############
+## Keybinding##
+###############
+# Reload config
+keybind = ctrl+space>r=reload_config
+# Close
+keybind = ctrl+space>x=close_surface
+
+# Split
+keybind = ctrl+space>\=new_split:right
+keybind = ctrl+space>-=new_split:down
+
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:down
+keybind = alt+k=goto_split:up
+keybind = alt+l=goto_split:right
+
+keybind = ctrl+space>==equalize_splits
+keybind = ctrl+space>z=toggle_split_zoom
+
+# Tabs
+keybind = ctrl+space>w=new_tab
+keybind = alt+period=next_tab
+keybind = alt+comma=previous_tab
+keybind = ctrl+space>comma=move_tab:-1
+keybind = ctrl+space>period=move_tab:1
