@@ -41,7 +41,7 @@ SELECTION="$(find ${SRC_DIR} -type d ! -path '*.git*' 2>&1 | grep -v "Permission
   --bind="ctrl-f:+reload(find ${SRC_DIR} -type f ! -path '*.git*' 2>&1 | grep -v 'Permission denied')" \
   --bind='ctrl-f:+change-preview(
     case {} in
-      *.jpg|*.jpeg|*.png|*.gif|*.bmp|*.tiff|*.tif|*.webp|*.avif|*.heic|*.heif)
+      *.jpg|*.jpeg|*.png|*.gif|*.bmp|*.svg|*.tiff|*.tif|*.webp|*.avif|*.heic|*.heif)
         kitty icat --clear --transfer-mode=stream --stdin=no --unicode-placeholder --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}
         ;;
       *)
@@ -79,7 +79,7 @@ fi
 
 if [[ -f "${FIRST_SELECTION}" ]]; then
   case "${FIRST_SELECTION##*.}" in
-    jpg|jpeg|png|gif|bmp|tiff|tif|webp|avif|heic|heif)
+    jpg|jpeg|png|gif|bmp|svg|tiff|tif|webp|avif|heic|heif)
       icat "${FIRST_SELECTION}" || return 0
       ;;
     webm|mkv|flv|vob|ogv|ogg|rrc|gifv|mng|mov|avi|qt|wmv|yuv|rm|asf|amv|mp4|m4p|m4v|mpg|mp2|mpeg|mpe|mpv|svi|3gp|3g2|mxf|roq|nsv|f4v|f4p|f4a|f4b|mod)
